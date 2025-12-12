@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuperar Contraseña</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13ec6d",
+            "background-light": "#f6f8f7",
+            "background-dark": "#102218",
+          },
+          fontFamily: {
+            display: ["Manrope", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: "Manrope", sans-serif;
+    }
+  </style>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center p-4">
+
+  <div class="w-full max-w-md mx-auto animate-fadeIn">
+    <!-- HEADER -->
+    <header class="flex items-center justify-center gap-4 mb-8 text-neutral-800 dark:text-neutral-200">
+      <div class="w-8 h-8 text-primary">
+        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-[#0d1b13] dark:text-white tracking-tight">
+        Sistema REPO
+      </h2>
+    </header>
+
+    <!-- CARD FORM -->
+    <div class="bg-white dark:bg-background-dark p-8 rounded-xl shadow-md border border-gray-200 dark:border-primary/30 space-y-6">
+      <div class="text-center space-y-2">
+        <p class="text-2xl font-extrabold text-[#0d1b13] dark:text-white">
+          Recuperar Contraseña
+        </p>
+        <p class="text-gray-600 dark:text-gray-400 text-sm">
+          Ingresa tu correo electrónico para recibir las instrucciones.
+        </p>
+      </div>
+
+      <!-- Form -->
+      <div class="space-y-6">
+        <label class="flex flex-col w-full">
+          <span class="pb-1 text-sm font-medium text-[#0d1b13] dark:text-gray-300">Correo Electrónico</span>
+          <input type="email" placeholder="ejemplo@empresa.com"
+            class="form-input h-12 px-4 rounded-lg border border-gray-300 dark:border-gray-700 bg-background-light dark:bg-neutral-800 text-[#0d1b13] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-500 focus:ring-primary focus:border-primary" />
+        </label>
+
+        <button
+          class="w-full h-12 bg-primary text-[#0d1b13] font-bold rounded-lg hover:opacity-90 transition-opacity">
+          Enviar Instrucciones
+        </button>
+      </div>
+
+      <p class="text-center text-sm text-gray-500 dark:text-gray-400">
+        ¿Recuerdas tu contraseña?
+        <a href="#" class="text-primary font-semibold hover:underline">
+          Iniciar Sesión
+        </a>
+      </p>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

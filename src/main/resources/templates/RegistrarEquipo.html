@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="light" lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registro de Equipo</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#39A900",
+            "background-light": "#F7F9FC",
+            "background-dark": "#102218",
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+</script>
+
+<style>
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+  }
+</style>
+</head>
+
+<body class="font-display">
+<div class="relative flex min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+
+<div class="layout-container flex h-full grow flex-col">
+
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-10 py-3 bg-white dark:bg-slate-900">
+  <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+    <div class="size-8">
+      <!-- ICONO -->
+      <svg class="text-primary fill-current" viewBox="0 0 588.6 589.6">
+        <g>
+          <path d="M303.8,25.6C303.8,25.6,303.8,25.6,303.8,25.6c43.6,0.3,86.2,12.7,122.9,35.8c6.1,3.8,11.8,8.2,17.2,12.9
+          c-17.6,18.8-35.3,37.6-53,56.5c-4.1-3.6-8.5-6.9-13.1-9.9c-20.9-13.3-45.2-20.4-70-20.6c-49.9-0.4-96.2,25-119.7,68.2
+          c-22.7,41.9-21.7,92.5,2.6,133.4c0.8,1.4,1.7,2.8,2.7,4.1l-55.6,55.6c-3.1-4.7-6-9.6-8.5-14.6c-41.5-80.4-23.7-179.8,42.5-240
+          C207.9,64.2,254.9,36,303.8,25.6z"/>
+        </g>
+      </svg>
+    </div>
+    <h2 class="text-lg font-bold tracking-[-0.015em]">Sistema REPQ</h2>
+  </div>
+
+  <div class="flex items-center gap-8">
+      <a class="text-sm font-medium text-slate-700 dark:text-slate-300" href="#">Dashboard</a>
+      <a class="text-sm font-bold text-slate-900 dark:text-white" href="#">Equipos</a>
+      <a class="text-sm font-medium text-slate-700 dark:text-slate-300" href="#">Reportes</a>
+  </div>
+
+</header>
+
+<main class="flex flex-1 justify-center py-10 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-2xl">
+
+<div class="flex flex-col gap-2 mb-8">
+  <p class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">Registrar Nuevo Equipo</p>
+  <p class="text-base text-slate-500 dark:text-slate-400">
+    Complete el formulario para agregar un nuevo equipo y generar su código QR.
+  </p>
+</div>
+
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm p-6 sm:p-8">
+
+<!-- FORMULARIO THYMELEAF -->
+<form th:action="@{/equipos/guardar}" th:object="${equipo}" method="post" class="flex flex-col gap-6">
+
+<div class="flex flex-col sm:flex-row items-start gap-6">
+  <div class="flex flex-col gap-6 flex-1">
+
+    <!-- Nombre -->
+    <label class="flex flex-col flex-1">
+      <p class="text-sm font-medium pb-2 text-slate-900 dark:text-white">Nombre del Equipo</p>
+      <input th:field="*{nombre}" placeholder="Ej: Laptop Dell XPS 15"
+          class="form-input rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-12 p-3"/>
+    </label>
+
+    <!-- Número de Serie -->
+    <label class="flex flex-col flex-1">
+      <p class="text-sm font-medium pb-2 text-slate-900 dark:text-white">Número de Serie</p>
+      <input th:field="*{numeroSerie}" placeholder="Ej: SN-45B32-A"
+          class="form-input rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-12 p-3"/>
+    </label>
+
+  </div>
+
+  <!-- QR -->
+  <div class="flex flex-col items-center gap-2 w-full sm:w-auto">
+    <p class="text-sm font-medium pb-2 text-slate-900 dark:text-white text-center">Código QR del Equipo</p>
+    <div class="w-40 h-40 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center border border-slate-300 dark:border-slate-700">
+      <div class="text-center p-4">
+        <span class="material-symbols-outlined text-4xl text-slate-400 dark:text-slate-500">qr_code_2</span>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">El código se generará aquí</p>
+      </div>
+    </div>
+
+    <button type="button"
+            class="flex items-center justify-center w-full h-10 px-4 bg-primary/20 text-primary font-bold rounded-lg mt-2">
+      <span class="material-symbols-outlined text-base">auto_awesome</span>
+      Generar QR
+    </button>
+  </div>
+</div>
+
+<!-- Descripción -->
+<label class="flex flex-col">
+  <p class="text-sm font-medium pb-2 text-slate-900 dark:text-white">Descripción</p>
+  <textarea th:field="*{descripcion}" placeholder="Agregue detalles adicionales sobre el equipo"
+      class="form-input rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark min-h-32 p-3"></textarea>
+</label>
+
+<!-- Aprendiz y ficha -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+  <label class="flex flex-col">
+    <p class="text-sm font-medium pb-2 text-slate-900 dark:text-white">Aprendiz</p>
+    <input th:field="*{aprendiz}" placeholder="Nombre del aprendiz a cargo"
+        class="form-input rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-12 p-3"/>
+  </label>
+
+  <label class="flex flex-col">
+    <p class="text-sm font-medium pb-2 text-slate-900 dark:text-white">Número de Ficha</p>
+    <input th:field="*{ficha}" placeholder="Ej: 2559632"
+        class="form-input rounded-lg border border-slate-300 dark:border-slate-700 bg-background-light dark:bg-background-dark h-12 p-3"/>
+  </label>
+
+</div>
+
+<!-- Botones -->
+<div class="flex items-center justify-end gap-4 pt-4">
+
+  <button type="button" onclick="window.location.href='/equipos'"
+      class="h-11 px-6 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg font-bold">
+    Cancelar
+  </button>
+
+  <button type="submit"
+      class="h-11 px-6 bg-primary text-white rounded-lg font-bold flex items-center gap-2">
+    <span class="material-symbols-outlined">save</span>
+    Guardar Equipo
+  </button>
+
+</div>
+
+</form>
+</div>
+</div>
+
+</main>
+</div>
+</div>
+
+</body>
+</html>

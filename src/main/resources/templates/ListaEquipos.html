@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Listado de Equipos</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#39A900",
+                        "background-light": "#F7F9FC",
+                        "background-dark": "#102218",
+                    },
+                    fontFamily: { display: ["Manrope", "sans-serif"] }
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="font-display">
+
+<div class="relative min-h-screen bg-background-light dark:bg-background-dark">
+
+    <!-- HEADER -->
+    <header class="flex items-center justify-between border-b px-10 py-3 bg-white dark:bg-slate-900">
+        <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+            <div class="size-10">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8iudupkA8HrZ1qlAcUl6hma-4C26QI1LNNEqXsgOjyPP7yn5N2cehTkTKJyM3Ds2mpp3amazbzJ1zDKzCNdeCpt_IvcTNGSWsZKBHkYSvlWdLttovvjUvRzTv8CMKbGtEyWzQ9cQCvTzaPvXF-fMc-PlkFprNrqTyU1E0SjLEyPBE9Fd2vBjRwtG70qizgHCh6JWvNqEAvDqWaXylb9LisukEuNN_-nudPZNLQMLcB6Be7TKG4-3ImINhOsXa2lt4eGRv7JOEBoUw"
+                     alt="Logo SENA" class="h-full w-full object-contain"/>
+            </div>
+            <h2 class="text-lg font-bold tracking-[-0.015em]">Sistema REPO</h2>
+        </div>
+
+        <div class="flex items-center gap-9">
+            <a href="#" class="text-slate-700 dark:text-slate-300 text-sm hover:text-primary">Dashboard</a>
+            <a href="#" class="text-slate-900 dark:text-white text-sm font-bold">Equipos</a>
+            <a href="#" class="text-slate-700 dark:text-slate-300 text-sm hover:text-primary">Reportes</a>
+        </div>
+    </header>
+
+    <!-- CONTENIDO -->
+    <main class="flex flex-col py-10 px-6 lg:px-8 max-w-7xl mx-auto">
+
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <p class="text-3xl font-black dark:text-white">Equipos Registrados</p>
+                <p class="text-slate-500 dark:text-slate-400">Administre el inventario de equipos de su organización.</p>
+            </div>
+
+            <a href="/equipos/nuevo"
+               class="flex items-center gap-2 h-11 px-6 bg-primary text-white rounded-lg hover:bg-green-700">
+                <span class="material-symbols-outlined">add</span> Agregar Nuevo Equipo
+            </a>
+        </div>
+
+        <!-- TABLA -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-50 dark:bg-slate-800 text-xs uppercase">
+                    <tr>
+                        <th class="px-6 py-3">Código QR</th>
+                        <th class="px-6 py-3">Nombre</th>
+                        <th class="px-6 py-3">Ficha</th>
+                        <th class="px-6 py-3">Serie</th>
+                        <th class="px-6 py-3">Usuario</th>
+                        <th class="px-6 py-3 text-right">Acciones</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="divide-y dark:divide-slate-800" th:each="equipo : ${equipos}">
+                        <tr th:each="equipo : ${equipos}" class="hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                            <td class="px-6 py-4 font-mono text-xs" th:text="${equipo.codigoQr}"></td>
+                            <td class="px-6 py-4 font-medium" th:text="${equipo.nombre}"></td>
+                            <td class="px-6 py-4" th:text="${equipo.numeroFicha}"></td>
+                            <td class="px-6 py-4" th:text="${equipo.numeroSerie}"></td>
+                            <td class="px-6 py-4" th:text="${equipo.usuario}"></td>
+                            <td class="px-6 py-4 text-right">
+                                <div class="flex justify-end gap-2">
+                                    <a th:href="@{/equipos/editar/{id}(id=${equipo.id})}"
+                                     class="flex size-8 items-center justify-center text-blue-600 hover:bg-blue-100 dark:text-blue-400 dark:hover:bg-blue-500/10 rounded-md">
+                                    <span class="material-symbols-outlined text-xl">edit</span>
+                                </a>
+
+      <button th:onclick="'openDeleteModal(' + ${equipo.id} + ')'"
+              class="flex size-8 items-center justify-center text-red-600 hover:bg-red-100 dark:hover:bg-red-500/10 rounded-md">
+        <span class="material-symbols-outlined text-xl">delete</span>
+      </button>
+    </div>
+  </td>
+</tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODAL -->
+    <div id="deleteModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-xl max-w-md w-full shadow-2xl">
+
+            <div class="p-6 text-center">
+                <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
+                    <span class="material-symbols-outlined text-red-600">delete</span>
+                </div>
+
+                <h3 class="mt-5 text-xl font-bold">Confirmar Eliminación</h3>
+                <p class="mt-2 text-sm">¿Seguro que deseas eliminar este equipo?</p>
+            </div>
+
+            <div class="flex justify-end gap-3 bg-slate-50 dark:bg-slate-800 p-4 rounded-b-xl">
+                <button onclick="closeDeleteModal()"
+                        class="h-10 px-4 bg-white dark:bg-slate-700 border rounded-lg">
+                    Cancelar
+                </button>
+
+                <a id="deleteLink"
+                   class="h-10 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700">
+                    Confirmar
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function openDeleteModal(id) {
+        const modal = document.getElementById("deleteModal");
+        const deleteLink = document.getElementById("deleteLink");
+        deleteLink.href = "/equipos/eliminar/" + id;
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+    }
+
+    function closeDeleteModal() {
+        const modal = document.getElementById("deleteModal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html class="light" lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registro</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#13ec6d",
+        "background-light": "#f6f8f7",
+        "background-dark": "#102218",
+      },
+      fontFamily: {
+        "display": ["Manrope", "sans-serif"]
+      }
+    },
+  },
+}
+</script>
+
+<style>
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-size: 24px;
+}
+</style>
+
+<style>
+    /* Evitar colores de validación automáticos */
+    input:invalid,
+    input:valid,
+    select:invalid,
+    select:valid,
+    textarea:invalid,
+    textarea:valid {
+        background-color: transparent !important;
+    }
+</style>
+
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d1b13] dark:text-gray-200">
+
+<div class="relative flex min-h-screen w-full flex-col">
+
+<div class="flex flex-1 w-full">
+<div class="grid grid-cols-1 md:grid-cols-2 min-h-screen w-full">
+
+<!-- COLUMNA IZQUIERDA -->
+<div class="relative hidden md:flex flex-col items-center justify-center bg-[#f8fcfa] dark:bg-background-dark p-8 lg:p-12">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent dark:from-primary/20 dark:to-transparent"></div>
+
+    <div class="relative z-10 flex flex-col items-start max-w-md w-full">
+
+        <div class="flex items-center gap-3 mb-6">
+            <span class="material-symbols-outlined text-primary text-4xl">qr_code_scanner</span>
+            <span class="text-2xl font-bold text-[#0d1b13] dark:text-white">Sistema REPQ</span>
+        </div>
+
+        <h1 class="text-5xl font-black leading-tight text-[#0d1b13] dark:text-white mb-4">
+            Bienvenido a Sistema REPQ
+        </h1>
+
+        <p class="text-lg text-[#4c9a6c] dark:text-gray-300">
+            Gestiona y registra tus equipos de forma simple y eficiente.
+        </p>
+
+        <img class="mt-12 rounded-xl shadow-lg object-cover w-full h-64"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOFfJdr3ywmHoB-r2BiCDBVY2wR9SjpWbJVipI9dXlzTLoKr2l9jurUaYr3zyHrUGQECfMvVBkkBrkdRAvuBHf1bkqlK0soZzxJLhiw1zNSucV7443fHuBkh8bX875Gai-kAanP71q00Kmzz0imD8vFYry-echIm03U9vA5KOLdR4FRf3FtC_gmyEjmlSUsQu-HLQj3sKZtf00afzMi7INhftxGCGLdTQGmMQEZ_tF7x-FopMqZkFjnPXojJcg3n1CmKsH60qqvHrJ"/>
+    </div>
+</div>
+
+<!-- COLUMNA DERECHA (FORMULARIO) -->
+<div class="flex flex-col items-center justify-center w-full p-4 sm:p-8 lg:p-12">
+
+<div class="w-full max-w-md">
+
+<!-- TABS -->
+<div class="pb-3 w-full">
+    <div class="flex border-b border-[#cfe7d9] dark:border-gray-700 gap-8">
+
+        <a th:href="@{/auth/login}"
+           class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#4c9a6c] pb-[13px] pt-4 flex-1">
+            <p class="text-sm font-bold">Iniciar Sesión</p>
+        </a>
+
+        <a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-[#0d1b13] pb-[13px] pt-4 flex-1">
+            <p class="text-sm font-bold">Registrarse</p>
+        </a>
+
+    </div>
+</div>
+
+<!-- 💬 MENSAJES -->
+<div th:if="${error}" class="mb-4 rounded-lg bg-red-200 text-red-900 py-3 px-4 text-sm font-semibold">
+    <span th:text="${error}"></span>
+</div>
+
+<div th:if="${success}" class="mb-4 rounded-lg bg-green-200 text-green-900 py-3 px-4 text-sm font-semibold">
+    <span th:text="${success}"></span>
+</div>
+
+<!-- FORMULARIO REGISTRO -->
+<h2 class="text-[28px] font-bold pt-5 pb-3">Crear una Cuenta Nueva</h2>
+
+<form class="flex flex-col gap-4"
+      th:action="@{/auth/register}"
+      th:object="${usuario}"
+      method="post">
+
+    <!-- Usuario -->
+    <div>
+        <label class="flex flex-col">
+            <p class="text-base font-medium pb-2">Nombre de Usuario</p>
+
+            <div class="flex w-full items-stretch rounded-lg">
+                <div class="text-[#4c9a6c] flex border border-[#cfe7d9] bg-[#f8fcfa]
+                            items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                    <span class="material-symbols-outlined">person</span>
+                </div>
+
+                <input th:field="*{username}" required
+                       placeholder="Elige un nombre de usuario"
+                       class="form-input flex w-full rounded-r-lg border border-[#cfe7d9] bg-[#f8fcfa] h-14 p-[15px]">
+            </div>
+        </label>
+    </div>
+
+    <!-- Email -->
+    <div>
+        <label class="flex flex-col">
+            <p class="text-base font-medium pb-2">Correo Electrónico</p>
+
+            <div class="flex w-full items-stretch rounded-lg">
+                <div class="text-[#4c9a6c] flex border border-[#cfe7d9] bg-[#f8fcfa]
+                            items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                    <span class="material-symbols-outlined">mail</span>
+                </div>
+
+                <input type="email" th:field="*{email}" required
+                       placeholder="Introduce tu correo"
+                       class="form-input flex w-full rounded-r-lg border border-[#cfe7d9] bg-[#f8fcfa] h-14 p-[15px]">
+            </div>
+        </label>
+    </div>
+
+    <!-- Contraseña -->
+    <div>
+        <label class="flex flex-col">
+            <p class="text-base font-medium pb-2">Contraseña</p>
+
+            <div class="flex w-full items-stretch rounded-lg">
+
+                <div class="text-[#4c9a6c] flex border border-[#cfe7d9] bg-[#f8fcfa]
+                            items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                    <span class="material-symbols-outlined">lock</span>
+                </div>
+
+                <input type="password" th:field="*{password}" required
+                       placeholder="Crea una contraseña segura"
+                       class="form-input flex w-full rounded-r-lg border border-[#cfe7d9] bg-[#f8fcfa] h-14 p-[15px]">
+            </div>
+        </label>
+    </div>
+
+    <!-- Botón -->
+    <button type="submit"
+            class="w-full bg-primary text-[#0d1b13] font-bold text-base py-4 px-6 rounded-lg hover:opacity-90 transition-opacity">
+        Registrarse
+    </button>
+
+    <p class="text-xs text-center text-[#4c9a6c] pt-2">
+        ¿Ya tienes cuenta?
+        <a th:href="@{/auth/login}" class="underline">Inicia sesión</a>
+    </p>
+</form>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+</body>
+</html>

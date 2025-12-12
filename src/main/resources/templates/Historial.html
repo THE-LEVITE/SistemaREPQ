@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="light" lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Historial de Equipos</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#13ec6d",
+        "background-light": "#f6f8f7",
+        "background-dark": "#102218",
+      },
+      fontFamily: { "display": ["Manrope", "sans-serif"] },
+    }
+  }
+}
+</script>
+
+<style>
+.status-in { color: #28a745; }
+.status-out { color: #dc3545; }
+</style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center py-5">
+
+<div class="layout-content-container flex flex-col w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+
+<!-- Header -->
+<header class="flex items-center justify-between border-b border-primary/20 px-6 py-3 bg-background-light dark:bg-background-dark/50 rounded-lg shadow-sm">
+
+<div class="flex items-center gap-4 text-gray-800 dark:text-white">
+<div class="text-primary">
+<span class="material-symbols-outlined" style="font-size: 28px;">qr_code_scanner</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">Sistema REPO</h2>
+</div>
+
+<div class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary" th:href="@{/dashboard}">Dashboard</a>
+<a class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-primary" th:href="@{/equipos}">Equipos</a>
+<a class="text-sm font-bold text-primary border-b-2 border-primary" th:href="@{/historial}">Historial</a>
+</div>
+
+</header>
+
+<!-- Main -->
+<main class="mt-8 flex flex-col gap-6">
+
+<!-- Título y botón -->
+<div class="flex flex-wrap justify-between gap-4 items-center">
+<div>
+<p class="text-3xl font-black text-gray-900 dark:text-white">Historial de Equipos</p>
+<p class="text-base text-gray-500 dark:text-gray-400">Consulta el historial de entrada y salida de los equipos.</p>
+</div>
+
+<button class="flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-black font-bold">
+<span class="material-symbols-outlined">download</span>
+Exportar Datos
+</button>
+</div>
+
+<!-- Filtros -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+<!-- Buscador -->
+<div class="lg:col-span-1">
+<label class="flex flex-col h-12 w-full">
+<div class="flex w-full items-center rounded-lg bg-primary/20 dark:bg-white/10 h-full">
+<div class="text-gray-600 dark:text-gray-400 pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input type="text" name="buscar" placeholder="Buscar por equipo o usuario..."
+       class="form-input w-full bg-transparent px-4 text-gray-800 dark:text-gray-200"/>
+</div>
+</label>
+</div>
+
+<!-- Rango fechas -->
+<div class="lg:col-span-2 flex flex-wrap gap-3">
+<button class="flex h-12 items-center gap-2 rounded-lg bg-primary/20 dark:bg-white/10 px-4 text-gray-800 dark:text-gray-200">
+<span class="material-symbols-outlined">calendar_month</span>
+Rango de Fechas
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+
+<button class="flex h-12 items-center gap-2 rounded-lg bg-primary/20 dark:bg-white/10 px-4 text-gray-800 dark:text-gray-200">
+<span class="material-symbols-outlined">filter_list</span>
+Tipo: Todos
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+
+</div>
+
+<!-- Tabla -->
+<div class="overflow-hidden rounded-xl border border-primary/20 bg-background-light dark:bg-background-dark shadow-sm">
+<div class="overflow-x-auto">
+
+<table class="w-full text-left">
+<thead>
+<tr class="bg-primary/20 dark:bg-white/5">
+<th class="px-6 py-4">Equipo</th>
+<th class="px-6 py-4">Tipo</th>
+<th class="px-6 py-4">Fecha y Hora</th>
+<th class="px-6 py-4">Usuario</th>
+<th class="px-6 py-4">Ficha</th>
+<th class="px-6 py-4">Registrado por</th>
+</tr>
+</thead>
+
+<tbody class="divide-y divide-primary/20">
+
+<!-- Loop dinámico con Page -->
+<tr th:each="mov : ${movimientos.content}">
+
+<td class="px-6 py-4" th:text="${mov.equipo.nombre}">Equipo</td>
+
+<td class="px-6 py-4">
+<div th:if="${mov.tipoMovimiento == 'Entrada'}"
+     class="inline-flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-green-800">
+<span class="material-symbols-outlined status-in">arrow_downward</span>
+<span>Entrada</span>
+</div>
+
+<div th:if="${mov.tipoMovimiento == 'Salida'}"
+     class="inline-flex items-center gap-2 rounded-full bg-red-100 px-3 py-1 text-red-800">
+<span class="material-symbols-outlined status-out">arrow_upward</span>
+<span>Salida</span>
+</div>
+</td>
+
+<td class="px-6 py-4" th:text="${#temporals.format(mov.fechaHora,'dd/MM/yyyy HH:mm')}">Fecha</td>
+
+<td class="px-6 py-4" th:text="${mov.usuario}">Usuario</td>
+
+<td class="px-6 py-4" th:text="${mov.ficha}">Ficha</td>
+
+<td class="px-6 py-4" th:text="${mov.registradoPor}">Registrado</td>
+
+</tr>
+
+</tbody>
+</table>
+
+</div>
+</div>
+
+<!-- PAGINACIÓN -->
+<div class="flex justify-center mt-6" th:if="${movimientos.totalPages > 1}">
+    <nav class="flex items-center gap-2">
+
+        <!-- Anterior -->
+        <a th:if="${!movimientos.first}"
+           th:href="@{/historial(page=${movimientos.number - 1})}"
+           class="px-3 py-1 rounded-lg bg-primary/20 text-gray-800 dark:text-gray-200">
+            Anterior
+        </a>
+
+        <span th:if="${movimientos.first}"
+              class="px-3 py-1 rounded-lg bg-gray-300 text-gray-500 cursor-not-allowed">
+            Anterior
+        </span>
+
+        <!-- Números (corregido, sin spans vacíos) -->
+        <span th:if="${movimientos.totalPages > 0}">
+            <span th:each="i : ${#numbers.sequence(0, movimientos.totalPages - 1)}">
+
+                <a th:if="${i != movimientos.number}"
+                   th:text="${i + 1}"
+                   th:href="@{/historial(page=${i})}"
+                   class="px-3 py-1 rounded-lg bg-primary/10 hover:bg-primary/30 text-gray-800 dark:text-gray-200">
+                </a>
+
+                <span th:if="${i == movimientos.number}"
+                      th:text="${i + 1}"
+                      class="px-3 py-1 rounded-lg bg-primary text-black font-bold">
+                </span>
+
+            </span>
+        </span>
+
+        <!-- Siguiente -->
+        <a th:if="${!movimientos.last}"
+           th:href="@{/historial(page=${movimientos.number + 1})}"
+           class="px-3 py-1 rounded-lg bg-primary/20 text-gray-800 dark:text-gray-200">
+            Siguiente
+        </a>
+
+        <span th:if="${movimientos.last}"
+              class="px-3 py-1 rounded-lg bg-gray-300 text-gray-500 cursor-not-allowed">
+            Siguiente
+        </span>
+
+    </nav>
+</div>
+
+
+
+</main>
+</div>
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Establecer Nueva Contraseña - Sistema REPO</title>
+
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#13ec6d",
+            "background-light": "#f6f8f7",
+            "background-dark": "#102218",
+            "surface-dark": "#1c2e24",
+          },
+          fontFamily: {
+            display: ["Manrope", "sans-serif"],
+          },
+          borderRadius: {
+            lg: "0.5rem",
+            xl: "0.75rem",
+            "2xl": "1rem",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      font-family: "Manrope", sans-serif;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white min-h-screen flex flex-col selection:bg-primary selection:text-slate-900 transition-colors duration-200">
+
+  <!-- HEADER -->
+  <header class="w-full border-b border-[#e7f3ec] dark:border-slate-800 bg-white/50 dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-3">
+          <div class="size-8 flex items-center justify-center rounded-lg bg-primary/20 text-primary">
+            <span class="material-symbols-outlined text-xl">qr_code_scanner</span>
+          </div>
+          <span class="text-lg font-bold tracking-tight">Sistema REPO</span>
+        </div>
+
+        <div class="hidden md:block">
+          <a href="#" class="text-sm font-medium text-slate-500 hover:text-primary dark:text-slate-400 transition-colors">
+            Ayuda
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
+    <div
+      class="w-full max-w-[480px] bg-white dark:bg-surface-dark rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden">
+
+      <!-- Icon & Title -->
+      <div class="px-8 pt-10 pb-6 text-center">
+        <div class="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-primary">
+          <span class="material-symbols-outlined text-4xl" style="font-variation-settings:'FILL' 1;">
+            lock_reset
+          </span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl font-bold mb-3">
+          Establecer Nueva Contraseña
+        </h1>
+
+        <p class="text-slate-500 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
+          Por favor ingresa tu nueva contraseña para acceder al sistema.
+        </p>
+      </div>
+
+      <!-- FORM -->
+      <form class="px-8 pb-10 space-y-6" onsubmit="event.preventDefault();">
+
+        <!-- Nueva contraseña -->
+        <div class="space-y-2">
+          <label for="password" class="text-sm font-medium">Nueva contraseña</label>
+
+          <div class="relative group">
+            <input
+              id="password"
+              type="password"
+              placeholder="Mínimo 8 caracteres"
+              class="block w-full h-12 px-4 rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 shadow-sm transition-all" />
+
+            <button type="button"
+              class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition">
+              <span class="material-symbols-outlined text-xl">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Barra de seguridad -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-end">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Seguridad</span>
+            <span class="text-xs font-medium text-amber-500">Media</span>
+          </div>
+
+          <div class="h-1.5 w-full bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+            <div class="h-full bg-amber-500 w-[45%] rounded-full transition-all"></div>
+          </div>
+
+          <p class="text-xs text-slate-400 dark:text-slate-500">
+            Usa 8 o más caracteres con una mezcla de letras, números y símbolos.
+          </p>
+        </div>
+
+        <!-- Confirmar contraseña -->
+        <div class="space-y-2">
+          <label for="confirm_password" class="text-sm font-medium">Confirmar contraseña</label>
+
+          <div class="relative">
+            <input
+              id="confirm_password"
+              type="password"
+              placeholder="Repite la contraseña"
+              class="block w-full h-12 px-4 rounded-lg bg-slate-50 dark:bg-background-dark border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 shadow-sm transition-all" />
+
+            <button type="button"
+              class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition">
+              <span class="material-symbols-outlined text-xl">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit"
+          class="w-full h-12 bg-primary hover:bg-[#0fd660] active:scale-[0.98] text-slate-900 font-bold rounded-lg shadow-lg shadow-primary/20 transition flex items-center justify-center gap-2 mt-2">
+          <span>Restablecer Contraseña</span>
+          <span class="material-symbols-outlined text-lg">arrow_forward</span>
+        </button>
+
+        <!-- Volver -->
+        <div class="text-center pt-2">
+          <a href="#"
+            class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-800 dark:hover:text-white transition">
+            <span class="material-symbols-outlined text-base">arrow_back</span>
+            Volver al inicio de sesión
+          </a>
+        </div>
+
+      </form>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="py-6 text-center text-slate-400 dark:text-slate-600 text-sm">
+    © 2024 Registro de Equipos. Todos los derechos reservados.
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Bienvenida / Inicio de Sesión</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec6d",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#102218",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d1b13] dark:text-gray-200">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-hidden">
+    <div class="flex flex-1 w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 min-h-screen w-full">
+            <div class="relative hidden md:flex flex-col items-center justify-center bg-[#f8fcfa] dark:bg-background-dark p-8 lg:p-12">
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent dark:from-primary/20 dark:to-transparent"></div>
+                <div class="relative z-10 flex flex-col items-start max-w-md w-full">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img alt="SENA Logo" class="h-12 w-12 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYP5e9p8ceXs2uCdLlZICzhtjooPu9kh73DzPDMecvCqD3SC5J6gkNhQ5lIewcGoWyLJP154y7dr71f7_tsAiSDBLYzyY3lSxTwBeytmkrc4xtbiWiCH4FjQRXLD3KbRqTIj-D7xSclI8n4l0RFFkF43JzR_5clxHp73aEgSidjr7XuKVzbW-ghP0lqI46JE35lUZ6eVCqgHVo_VYFavO5ZLyi0Iqi9ZvzMZmWuKIK6Ftpc5qAoqXGOlPRdkSYqrygDyTcmsJTf-wX"/>
+                        <span class="text-2xl font-bold text-[#0d1b13] dark:text-white">Sistema REPQ</span>
+                    </div>
+                    <h1 class="text-5xl font-black leading-tight tracking-[-0.033em] text-[#0d1b13] dark:text-white mb-4">Bienvenido a Sistema REPQ</h1>
+                    <p class="text-lg text-[#4c9a6c] dark:text-gray-300">Gestiona y registra tus equipos de forma simple y eficiente.</p>
+                    <img class="mt-12 rounded-xl shadow-lg object-cover w-full h-64" data-alt="Abstract image representing digital management and organization" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOFfJdr3ywmHoB-r2BiCDBVY2wR9SjpWbJVipI9dXlzTLoKr2l9jurUaYr3zyHrUGQECfMvVBkkBrkdRAvuBHf1bkqlK0soZzxJLhiw1zNSucV7443fHuBkh8bX875Gai-kAanP71q00Kmzz0imD8vFYry-echIm03U9vA5KOLdR4FRf3FtC_gmyEjmlSUsQu-HLQj3sKZtf00afzMi7INhftxGCGLdTQGmMQEZ_tF7x-FopMqZkFjnPXojJcg3n1CmKsH60qqvHrJ"/>
+                </div>
+            </div>
+            <div class="flex flex-col items-center justify-center w-full bg-background-light dark:bg-background-dark p-4 sm:p-8 lg:p-12">
+                <div class="w-full max-w-md">
+                    <div class="flex md:hidden flex-col items-center text-center mb-8">
+                        <div class="flex items-center gap-2 mb-3">
+                            <img alt="SENA Logo" class="h-10 w-10 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCT_xFro0ud8i62OMLpXHcnBSCTqVuDZuDjVWHDMJOiSvU0VCzZI3XuX4BSedljscm9x7oHTzQ5vndnXByzGIE_UqLWJ4yB6fZJFJmR7GXXVXmptC3hiiYN5LUah4OPxi-m3Z4yAOKAc1Fx-07kgjW8YDdnwbfP9FiZBXjAWxnpjx6Li3DVoXowHrlO5Yd-mcPnK_2j_8UvF2PjiKFcWrDW3XQJNkTxaDljyAKaXAcVDTXxy2m-KH4Aj-PTt87aprri8zpqkZ53Vx_I"/>
+                            <span class="text-xl font-bold text-[#0d1b13] dark:text-white">Sistema REPQ</span>
+                        </div>
+                        <h1 class="text-3xl font-black text-[#0d1b13] dark:text-white">Bienvenido</h1>
+                        <p class="text-base text-[#4c9a6c] dark:text-gray-300">Gestiona tus equipos de forma simple.</p>
+                    </div>
+                    <div class="pb-3 w-full">
+                        <div class="flex border-b border-[#cfe7d9] dark:border-gray-700 gap-8">
+                            <a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-[#0d1b13] dark:text-white pb-[13px] pt-4 flex-1" href="#">
+                                <p class="text-sm font-bold leading-normal tracking-[0.015em]">Iniciar Sesión</p>
+                            </a>
+                            <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#4c9a6c] dark:text-gray-400 pb-[13px] pt-4 flex-1" href="#">
+                                <p class="text-sm font-bold leading-normal tracking-[0.015em]">Registrarse</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-full">
+                        <h2 class="text-[#0d1b13] dark:text-white tracking-light text-[28px] font-bold leading-tight pt-5 pb-3">Iniciar Sesión</h2>
+                        <!-- Aquí va el formulario de inicio de sesión con acción y nombres de inputs actualizados -->
+                        <form class="flex flex-col gap-4" action="/login" method="post">
+                            <div class="flex flex-col">
+                                <label class="flex flex-col min-w-40 flex-1">
+                                    <p class="text-[#0d1b13] dark:text-gray-200 text-base font-medium leading-normal pb-2">Correo Electrónico / Usuario</p>
+                                    <div class="flex w-full flex-1 items-stretch rounded-lg">
+                                        <div class="text-[#4c9a6c] dark:text-gray-400 flex border border-[#cfe7d9] dark:border-gray-600 bg-[#f8fcfa] dark:bg-gray-800 items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                                            <span class="material-symbols-outlined">mail</span>
+                                        </div>
+                                        <!-- Aquí cambiamos el nombre del campo -->
+                                        <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d1b13] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#cfe7d9] dark:border-gray-600 bg-[#f8fcfa] dark:bg-gray-800 focus:border-primary dark:focus:border-primary h-14 placeholder:text-[#4c9a6c] dark:placeholder:text-gray-500 p-[15px] rounded-l-none border-l-0 text-base font-normal leading-normal" placeholder="Introduce tu correo o usuario" name="username" type="text" value=""/>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="flex flex-col min-w-40 flex-1">
+                                    <p class="text-[#0d1b13] dark:text-gray-200 text-base font-medium leading-normal pb-2">Contraseña</p>
+                                    <div class="flex w-full flex-1 items-stretch rounded-lg">
+                                        <div class="text-[#4c9a6c] dark:text-gray-400 flex border border-[#cfe7d9] dark:border-gray-600 bg-[#f8fcfa] dark:bg-gray-800 items-center justify-center pl-[15px] rounded-l-lg border-r-0">
+                                            <span class="material-symbols-outlined">lock</span>
+                                        </div>
+                                        <!-- Aquí cambiamos el nombre del campo también -->
+                                        <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d1b13] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#cfe7d9] dark:border-gray-600 bg-[#f8fcfa] dark:bg-gray-800 focus:border-primary dark:focus:border-primary h-14 placeholder:text-[#4c9a6c] dark:placeholder:text-gray-500 p-[15px] rounded-r-none border-r-0 rounded-l-none text-base font-normal leading-normal" placeholder="Introduce tu contraseña" name="password" type="password" value=""/>
+                                        <div class="text-[#4c9a6c] dark:text-gray-400 flex border border-[#cfe7d9] dark:border-gray-600 bg-[#f8fcfa] dark:bg-gray-800 items-center justify-center pr-[15px] rounded-r-lg border-l-0 cursor-pointer">
+                                            <span class="material-symbols-outlined">visibility</span>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="flex justify-end pt-1">
+                                <a class="text-sm font-medium text-[#4c9a6c] dark:text-primary/80 hover:text-primary dark:hover:text-primary" href="#">¿Olvidaste tu contraseña?</a>
+                            </div>
+                            <div class="pt-4">
+                                <button class="w-full bg-primary text-[#0d1b13] font-bold text-base py-4 px-6 rounded-lg hover:opacity-90 transition-opacity" type="submit">Iniciar Sesión</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

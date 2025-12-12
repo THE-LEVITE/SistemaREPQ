@@ -2,7 +2,8 @@ package com.repq.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.repq.entidad.Equipo;
+
+import com.repq.model.Equipo;
 
 import java.util.List;
 
