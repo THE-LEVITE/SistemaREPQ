@@ -1,48 +1,64 @@
 package com.repq.entidad;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "equipos")
 public class Equipo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_equipo;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    private String nombre_equipo;
+	private String nombreEquipo;
 
-    @Column(unique = true)
-    private String serial;
+	private String numeroSerie;
 
-    @Column(unique = true)
-    private String qr_code;
+	@Column(unique = true)
+	private String codigoQR;
 
-    private LocalDateTime fecha_registro = LocalDateTime.now();
+	@ManyToOne
+	@JoinColumn(name = "aprendiz_id")
+	private Aprendiz aprendiz;
 
-    // RELACIÓN: Muchos equipos -> un aprendiz
-    @ManyToOne
-    @JoinColumn(name = "id_aprendiz")
-    private Aprendiz aprendiz;
+	// Getters y Setters
+	public Integer getId() {
+		return id;
+	}
 
-    public Equipo() {}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getId_equipo() { return id_equipo; }
-    public void setId_equipo(Integer id_equipo) { this.id_equipo = id_equipo; }
+	public String getNombreEquipo() {
+		return nombreEquipo;
+	}
 
-    public String getNombre_equipo() { return nombre_equipo; }
-    public void setNombre_equipo(String nombre_equipo) { this.nombre_equipo = nombre_equipo; }
+	public void setNombreEquipo(String nombreEquipo) {
+		this.nombreEquipo = nombreEquipo;
+	}
 
-    public String getSerial() { return serial; }
-    public void setSerial(String serial) { this.serial = serial; }
+	public String getNumeroSerie() {
+		return numeroSerie;
+	}
 
-    public String getQr_code() { return qr_code; }
-    public void setQr_code(String qr_code) { this.qr_code = qr_code; }
+	public void setNumeroSerie(String numeroSerie) {
+		this.numeroSerie = numeroSerie;
+	}
 
-    public LocalDateTime getFecha_registro() { return fecha_registro; }
-    public void setFecha_registro(LocalDateTime fecha_registro) { this.fecha_registro = fecha_registro; }
+	public String getCodigoQR() {
+		return codigoQR;
+	}
 
-    public Aprendiz getAprendiz() { return aprendiz; }
-    public void setAprendiz(Aprendiz aprendiz) { this.aprendiz = aprendiz; }
+	public void setCodigoQR(String codigoQR) {
+		this.codigoQR = codigoQR;
+	}
+
+	public Aprendiz getAprendiz() {
+		return aprendiz;
+	}
+
+	public void setAprendiz(Aprendiz aprendiz) {
+		this.aprendiz = aprendiz;
+	}
 }

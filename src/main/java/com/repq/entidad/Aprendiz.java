@@ -6,21 +6,48 @@ import jakarta.persistence.*;
 @Table(name = "aprendices")
 public class Aprendiz {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_aprendiz;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    private String nombre;
-    private String ficha;
+	private String nombre;
 
-    public Aprendiz() {}
+	private String documento;
 
-    public Integer getId_aprendiz() { return id_aprendiz; }
-    public void setId_aprendiz(Integer id_aprendiz) { this.id_aprendiz = id_aprendiz; }
+	@ManyToOne
+	@JoinColumn(name = "ficha_id")
+	private Ficha ficha;
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+	// Getters y Setters
+	public Integer getId() {
+		return id;
+	}
 
-    public String getFicha() { return ficha; }
-    public void setFicha(String ficha) { this.ficha = ficha; }
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(String documento) {
+		this.documento = documento;
+	}
+
+	public Ficha getFicha() {
+		return ficha;
+	}
+
+	public void setFicha(Ficha ficha) {
+		this.ficha = ficha;
+	}
 }

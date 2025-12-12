@@ -7,47 +7,60 @@ import java.time.LocalDateTime;
 @Table(name = "historial_movimientos")
 public class HistorialMovimiento {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_mov;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @Enumerated(EnumType.STRING)
-    private TipoMovimiento tipo;
+	private String tipoMovimiento; // ENTRADA / SALIDA
 
-    private LocalDateTime fecha_hora = LocalDateTime.now();
+	private LocalDateTime fechaHora;
 
-    // RELACIÓN: muchos historial -> un equipo
-    @ManyToOne
-    @JoinColumn(name = "id_equipo")
-    private Equipo equipo;
+	@ManyToOne
+	@JoinColumn(name = "equipo_id")
+	private Equipo equipo;
 
-    // RELACIÓN: muchos historial -> un aprendiz
-    @ManyToOne
-    @JoinColumn(name = "id_aprendiz")
-    private Aprendiz aprendiz;
+	@ManyToOne
+	@JoinColumn(name = "administrador_id")
+	private Administrador administrador;
 
-    // RELACIÓN: muchos historial -> un admin
-    @ManyToOne
-    @JoinColumn(name = "id_admin")
-    private Administrador admin;
+	// Getters y Setters
+	public Integer getId() {
+		return id;
+	}
 
-    public HistorialMovimiento() {}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getId_mov() { return id_mov; }
-    public void setId_mov(Integer id_mov) { this.id_mov = id_mov; }
+	public String getTipoMovimiento() {
+		return tipoMovimiento;
+	}
 
-    public TipoMovimiento getTipo() { return tipo; }
-    public void setTipo(TipoMovimiento tipo) { this.tipo = tipo; }
+	public void setTipoMovimiento(String tipoMovimiento) {
+		this.tipoMovimiento = tipoMovimiento;
+	}
 
-    public LocalDateTime getFecha_hora() { return fecha_hora; }
-    public void setFecha_hora(LocalDateTime fecha_hora) { this.fecha_hora = fecha_hora; }
+	public LocalDateTime getFechaHora() {
+		return fechaHora;
+	}
 
-    public Equipo getEquipo() { return equipo; }
-    public void setEquipo(Equipo equipo) { this.equipo = equipo; }
+	public void setFechaHora(LocalDateTime fechaHora) {
+		this.fechaHora = fechaHora;
+	}
 
-    public Aprendiz getAprendiz() { return aprendiz; }
-    public void setAprendiz(Aprendiz aprendiz) { this.aprendiz = aprendiz; }
+	public Equipo getEquipo() {
+		return equipo;
+	}
 
-    public Administrador getAdmin() { return admin; }
-    public void setAdmin(Administrador admin) { this.admin = admin; }
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
+	}
+
+	public Administrador getAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(Administrador administrador) {
+		this.administrador = administrador;
+	}
 }
